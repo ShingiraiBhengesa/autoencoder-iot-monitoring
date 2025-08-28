@@ -1,0 +1,50 @@
+# Model configuration
+autoencoder:
+  type: "dense"  # or "lstm", "tcn" 
+  architecture:
+    encoder_layers: [128, 64, 16]
+    decoder_layers: [64, 128]
+    activation: "relu"
+    bottleneck_dim: 16
+    dropout_rate: 0.1
+  
+  training:
+    batch_size: 256
+    epochs: 100
+    learning_rate: 0.001
+    optimizer: "adam"
+    loss: "mse"
+    early_stopping:
+      patience: 15
+      min_delta: 0.0001
+      restore_best_weights: true
+    validation_split: 0.2
+
+threshold:
+  method: "precision_recall"  # or "extreme_value", "percentile"
+  target_precision: 0.90
+  fallback_percentile: 99.5
+  calibration_window: "validation"
+
+baseline:
+  isolation_forest:
+    contamination: 0.1
+    n_estimators: 100
+    max_samples: "auto"
+    random_state: 42
+
+evaluation:
+  metrics:
+    - "precision"
+    - "recall" 
+    - "f1"
+    - "pr_auc"
+    - "roc_auc"
+  target_precision: 0.90
+  target_pr_auc: 0.85
+
+export:
+  onnx:
+    opset_version: 11
+    optimize: true
+  model_version: "ae_v1"

@@ -1,0 +1,76 @@
+# Pipeline configuration - environment variables will override these
+azure:
+  resource_group: "rg-iot-anomaly"
+  location: "eastus"
+  
+  eventhub:
+    namespace: "eh-iot-anomaly"
+    ingest_hub: "sensor-data"
+    features_hub: "features"
+    partition_count: 4
+    retention_days: 1
+  
+  stream_analytics:
+    job_name: "iot-feature-engineering"
+    streaming_units: 1
+    window_size_seconds: 5
+  
+  sql_database:
+    server: "sql-iot-anomaly"
+    database: "anomaly_db"
+    table: "anomalies"
+  
+  function_app:
+    name: "func-iot-scoring"
+    runtime: "python"
+    version: "3.11"
+    consumption_plan: true
+  
+  storage:
+    account: "stiotanomaly"
+    container: "models"
+  
+  app_insights:
+    name: "appinsights-iot-anomaly"
+
+serving:
+  api:
+    host: "0.0.0.0"
+    port: 8000
+    workers: 1
+    timeout: 30
+  
+  model:
+    path: "models/model.onnx"
+    scaler_path: "models/scaler.pkl"
+    threshold_path: "models/threshold.json"
+  
+  performance:
+    target_p50_ms: 200
+    target_p95_ms: 500
+    max_batch_size: 100
+
+streaming:
+  simulator:
+    devices: ["dev-1", "dev-2", "dev-3"]
+    base_temp: 22.0
+    temp_variation: 2.0
+    anomaly_probability: 0.01
+    burst_anomaly_probability: 0.005
+    send_interval_ms: 100
+  
+  processing:
+    window_overlap: 0.5
+    feature_buffer_size: 1000
+    anomaly_threshold: 0.5
+
+monitoring:
+  drift_detection:
+    window_days: 7
+    psi_threshold: 0.2
+    alert_webhook: null
+  
+  performance_sla:
+    max_latency_p99_ms: 1000
+    min_throughput_per_sec: 1000
+    max_error_rate_percent: 1.0

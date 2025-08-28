@@ -1,0 +1,32 @@
+# Data configuration
+dataset:
+  name: "NAB"
+  source: "numenta_anomaly_benchmark"
+  focus_sensors: ["temperature", "humidity"]
+  
+windowing:
+  window_size: 30
+  stride: 1
+  
+splitting:
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+  split_by_time: true
+  
+preprocessing:
+  scaler_type: "MinMaxScaler"  # or RobustScaler
+  handle_missing: "interpolate"
+  outlier_threshold: 3.0
+  
+features:
+  rolling_stats:
+    - "mean"
+    - "std" 
+    - "min"
+    - "max"
+  window_sizes: [5, 10, 15]
+  engineered:
+    - "z_score"
+    - "delta" 
+    - "rolling_z"
