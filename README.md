@@ -412,23 +412,4 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
 
-- **Numenta Anomaly Benchmark**: For providing the foundational dataset
-- **TensorFlow Team**: For the excellent ML framework
-- **FastAPI Community**: For the outstanding API framework
-- **Azure Team**: For the robust cloud platform
-
-## 📞 Contact & Support
-
-- **GitHub Issues**: [Report bugs or request features](https://github.com/ShingiraiBhengesa/autoencoder-iot-monitoring/issues)
-- **Documentation**: [Full documentation](https://docs.your-domain.com)
-- **Email**: your.email@example.com
-
----
-
-<div align="center">
-  <strong>Built with ❤️ for the IoT community</strong>
-  <br>
-  <sub>Transforming sensor data into actionable insights</sub>
-</div>
